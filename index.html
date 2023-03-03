@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div id="app"></div>
+    <script src="data.js"></script>
+    <script src="pokemon.js"></script>
+    <script src="trainer.js"></script>
+    <script src="battle.js"></script>
+    <script src="overworld.js"></script>
+    <script src="controller.js"></script>
+    <script src="testingInstances.js"></script>
+    <script>
+        //model
+        let trainerPokemonCurrentlyViewed = false;
+        let battleIsUnderway = false;
+        let overworldDialog = '';
+        let navX = 0;
+        let navY = 0;
+        
+        
+
+
+        
+        //view
+        viewWelcome();
+
+        function viewWelcome() {
+            document.getElementById("app").innerHTML = `
+                <h1>Velkommen til pokemon-verdenen!</h1>
+                <button onclick="viewSelectName()">Bli en trener</button>
+            `;
+        };
+
+        async function viewSelectName() {
+            document.getElementById("app").innerHTML = `
+                <h1>Velkommen til pokemon-verdenen!</h1>
+                <input id='nicknameField' type='text' placeholder='Navnet ditt'></input>
+                <br><button id="nicknameButton" onclick="submitNickname()">Ok</button>
+            `;
+            let nickname = await nickNameChosen();
+            runTrainerInstancing(nickname);
+        }
+
+        function view() { /*HTML*/ //<-- dersom du vil få innerhtml stringen til å se ut som HTML
+            let html = `
+                <h1>Ut på eventyr...</h1>
+                <canvas id="overworldScreen" height="700px" width="1100px"></canvas>`;
+            if (!overworldDialog) { //TODO <button onclick="swapPokemon()">Bytt plass på pokemon</button> må ha navigasjonsmeny. Kan sikkert yoinkes fra swapPokemonInBattle
+                overworldDialog = `
+                <div id="neutralMessage">
+                    <button onclick="runTrainerBattleInstancing()">Gå i kamp</button>
+                    <button onclick="generateWildPokemon()">Gå i gresset</button>
+                    <p>Money: <b>${player.money}</b></p>
+                </div>
+                `;
+            }
+            html += `
+            <div id="overworldMessage">${overworldDialog}</div>
+            `;
+            
+            
+            document.getElementById("app").innerHTML = html;
+            overworldDialog = ``;
+        };
+
+        async function viewBattle() {
+            if (battleIsUnderway) {
+                //vis kamp
+                //ha "intro-scene" her
+                document.getElementById("app").innerHTML = `
+                    <h1>Kamp foregår!</h1>
+                    <canvas id="battleScreen" height="700px" width="1100px"></canvas>
+                    <div id="battleMessage"></div>
+                `;
+                overworldDialog = ``;
+            }
+
+            else {
+                //når kampen er ferdig. Blir litt controllerfunkjson som er fyfy å ha i view
+                if (overworldDialog) {
+                    view();
+                    await waitingContinue();
+                    for (pokemon in player.trainerPokemon) {
+                        let givenPokemon = player.trainerPokemon[pokemon];
+                        let givenPokemonId = givenPokemon.getPokemonId();
+
+                        let moveCount = givenPokemon.getAvailableMoveCount();
+                        switch (moveCount) {
+                            case 1:
+                                let newMove2 = learnSet[givenPokemonId]['move2'];
+                                if (newMove2) {
+                                    if (givenPokemon.level >= newMove2.level) {
+                                    let newMoveString = getMoveStringFromId(newMove2['moveId']);
+                                    givenPokemon.moveList[1] = getMoveFromString(newMoveString);
+                                    moveCount++;
+                                    overworldDialog = `${givenPokemon.getNickname()} learned ${newMoveString}!  ▼`;
+                                    showOverworldDialog();
+                                    await waitingContinue();
+                                    };
+                                }
+                                
+
+                            case 2:
+                                let newMove3 = learnSet[givenPokemonId]['move3'];
+                                if (newMove3) {
+                                    if (givenPokemon.level >= newMove3.level) {
+                                    let newMoveString = getMoveStringFromId(newMove3['moveId']);
+                                    givenPokemon.moveList[2] = getMoveFromString(newMoveString);
+                                    moveCount++;
+                                    overworldDialog = `${givenPokemon.getNickname()} learned ${newMoveString}!  ▼`;
+                                    showOverworldDialog();
+                                    await waitingContinue();
+                                    };
+                                }
+                                
+
+                            case 3:
+                                let newMove4 = learnSet[givenPokemonId]['move4'];
+                                if (newMove4) {
+                                    if (givenPokemon.level >= newMove4.level) {
+                                    let newMoveString = getMoveStringFromId(newMove4['moveId']);
+                                    givenPokemon.moveList[3] = getMoveFromString(newMoveString);
+                                    moveCount++;
+                                    overworldDialog = `${givenPokemon.getNickname()} learned ${newMoveString}!  ▼`;
+                                    showOverworldDialog();
+                                    await waitingContinue();
+                                };
+                                }
+                            case 4:
+                                break;
+                        }
+                        
+
+                        if (givenPokemon.pokemonData.evolve) {
+                            if (givenPokemon.level >= givenPokemon.pokemonData.evolve['level']) {
+                                await givenPokemon.evolve();
+                            }
+                        }
+                    }
+                }
+                
+                overworldDialog = '';
+                view();
+                
+            }
+        }
+
+        function showOverworldDialog() {
+            document.getElementById("overworldMessage").innerHTML = overworldDialog;
+        }
+
+        //controller
+    </script>
+</body>    
+</html>

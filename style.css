@@ -1,0 +1,38 @@
+#overworldScreen {
+    border: 2px solid black;
+}
+
+#overworldMessage {
+    font-size: 64px;
+}
+
+#neutralMessage {
+    font-size: 18px;
+}
+
+#battleScreen {
+    border: 2px solid black;
+}
+
+#battleMessage {
+    width: 1096px;
+    height: 200px;
+    padding: 2px;
+    border: 2px solid black;
+    background-color: rgba(0, 255, 255, 0.482);
+    font-size: 40px;
+    overflow-y: auto;
+}
+
+.selectionButton {
+    background-color: whitesmoke;
+}
+
+.buttonHovered {
+    border: 2px solid black;
+    background-color: antiquewhite;
+}
+
+table {
+    empty-cells: show;
+}
