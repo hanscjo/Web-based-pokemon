@@ -11,7 +11,8 @@ function runTrainerInstancing(playerName) {
     trainer2 = new npcTrainer('Romero', pokemon4, null, null, null, null, null, 200, 'Lykke til!', 'Bedre lykke nestegang!', 'Wow... Du er flink...', 'img/trainers/romero.png');
     trainer3 = new npcTrainer("Ashley", pokemon6, null, null, null, null, null, 500, null, null, null, null);
     player = new playerTrainer(playerName, pokemon3, null, null, null, null, null);
-    view()
+    view();
+    viewScenery();
 }
 
 function testImmunities() {

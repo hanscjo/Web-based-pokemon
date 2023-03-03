@@ -67,7 +67,7 @@ const learnSet = [ //id korresponderer til hvilken pokemon, move-verdier korresp
     {id: 7, move1: {level: 1, moveId: 1}, move2: {level: 1, moveId: 4}, move3: {level: 16, moveId: 11}, move4: {level: 42, moveId: 10}},
     {id: 8, move1: {level: 1, moveId: 1}, move2: {level: 1, moveId: 4}, move3: {level: 1, moveId: 11}, move4: {level: 36, moveId: 10}},
     {id: 9, move1: {level: 1, moveId: 1}, move2: {level: 5, moveId: 11}, move3: {level: 10, moveId: 5}, move4: {level: 20, moveId: 2}},
-    {id: 10, move1: {level: 1, moveId: 1}, move2: {level: 15, moveId: 8}, move3: {level: 25, moveId: 11}, move4: {level: 35, moveId: 10}}
+    {id: 10, move1: {level: 1, moveId: 1}, move2: {level: 15, moveId: 8}, move3: {level: 25, moveId: 11}, move4: {level: 35, moveId: 14}}
 ];
 
 const allPokemonMoves = [ //id er egt bare for å holde oversikt over indeks imens man mapper moves

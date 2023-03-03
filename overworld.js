@@ -6,6 +6,7 @@ async function pokecenter(trainer) {
     }
     battleIsUnderway = false;
     overworldDialog = '';
+    changeScenery();
     viewBattle();
     trainer.readyPokemon = trainer.trainerPokemon.length;
     trainer.faintedPokemon = 0;
@@ -71,7 +72,7 @@ async function swapPokemonOutside() {
         navY = 0;
         
         while (pressedBackspace == false) {
-            let html = `<table style="width:50%; height:98%">
+            let html = `<table id="swapping" style="width:50%; height:98%">
             <tr>
                 <td id="choice1" rowspan="${totalPokemon}">${player.getLeadPokemon().getNickname()}</td>
             </tr>
@@ -113,6 +114,7 @@ async function swapPokemonOutside() {
                 navY = 0; //Nullstille knappen
                 overworldDialog = '';
                 view();
+                viewScenery();
             }
         }
 }
@@ -161,6 +163,7 @@ async function browseShop() {
             navY = 0; //Nullstille knappen
             overworldDialog = '';
             view();
+            viewScenery()
         }
     }   
 }
@@ -233,4 +236,19 @@ async function browseItem(selectedItem) {
     return new Promise((resolve) => {
         resolve();
     });
+}
+
+function viewScenery() {
+    let canvas3 = document.getElementById("overworldScreen");
+    let ctx3 = canvas3.getContext("2d");
+    ctx3.clearRect(0, 0, 1100, 700);
+    let landscapeImg = new Image();
+    landscapeImg.onload = function() {
+        ctx3.drawImage(landscapeImg, 0, 0);
+    };
+    landscapeImg.src = `img/landscape/${imgNumber}.png`;
+}
+
+function changeScenery() {
+    imgNumber = Math.floor(Math.random()*5);
 }

@@ -1431,6 +1431,7 @@ class wildBattle extends Battle {
                 originalPokemon.remainingHp = battlePokemon.remainingHp;
                 originalPokemon.status = battlePokemon.status;
             };
+            changeScenery();
             await waitingContinue();
         }
         else {
@@ -1651,6 +1652,7 @@ class trainerBattle extends Battle {
             this.showBattleDialog();
             await waitingContinue();
             overworldDialog = `Your pokemon levelled up!  ▼`;
+            changeScenery();
         }
         else {
             this.battleDialog = "Player was defeated!  ▼";
