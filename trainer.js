@@ -134,7 +134,7 @@ class Bag {
         this.trainer = trainer;
         
         this.content = [ //Push objekter med itemnavn, effekt og antall. Fjern ting dersom count = 0
-        {category: 'Medicine', items: [{name: 'Potion', count: 1, effect: 'heal20'}]},
+        {category: 'Medicine', items: [{name: 'Potion', count: 1, effect: 'heal'}]},
         {category: 'Berries', items: []},
         {category: 'Pokeballs', items: [{name: 'Pokeball', count: 5}, {name: 'Great Ball', count: 2}, {name: 'Ultra Ball', count: 1}, {name: 'Dive Ball', count: 1}, {name: 'Master Ball', count: 1}]}, //bare sammenlign med ballName
         {category: 'Key items', items: [{name: "Mom's lunch", count: 1, effect: 'momLunch'}]}

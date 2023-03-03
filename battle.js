@@ -604,8 +604,8 @@ class Battle {
                     
                     //sjekk hva itemet gjør
                     switch (bagReference[navX].items[navY].effect) {
-                        case "heal20":
-                            this.healHealth(this.playerCurrentPokemon, 20);
+                        case "heal":
+                            this.healHealth(this.playerCurrentPokemon, healTable[0][selectedItem]);
                             this.battleDialog = `${this.playerCurrentPokemon.getNickname()} regained health!`;
                             this.showBattleDialog();
                             await delay(2000);

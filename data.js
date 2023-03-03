@@ -119,9 +119,31 @@ const ballShakeMessage = [
     "Shoot! It was so close!"
 ];
 
+const medicine = [
+    {name: 'Potion', effect: 'heal', healing: 20}, //Skriv om til heal?
+    {name: 'Super Potion', effect: 'heal', healing: 50},
+    {name: 'Hyper Potion', effect: 'heal', healing: 200}
+]
+
+const healTable =  [
+    {'Potion': 20,
+    'Super Potion': 50,
+    'Hyper Potion': 200}
+]
+
 const bagTemplate = [ //Push objekter med itemnavn, effekt og antall
     {category: 'Medicine', items: []},
     {category: 'Berries', items: []},
     {category: 'Pokeballs', items: []},
     {category: 'Key items', items: []}
 ];
+
+const shopInventory = [
+    {category: 'Pokeballs', name: 'Pokeball', price: 100},
+    {category: 'Pokeballs', name: 'Great Ball', price: 400},
+    {category: 'Pokeballs', name: 'Ultra Ball', price: 800},
+    {category: 'Pokeballs', name: 'Dive Ball', price: 500},
+    {category: 'Medicine', name: 'Potion', price: 200},
+    {category: 'Medicine', name: 'Super Potion', price: 500},
+    {category: 'Medicine', name: 'Hyper Potion', price: 1000}
+]
