@@ -155,6 +155,7 @@ class Battle {
             await this.endBattle(true);
             if (this.playerTrainer.readyPokemon == 0) { //Ved død gjennom poison. Teller fortsatt som at player vant.
                 await pokecenter(this.playerTrainer);
+                viewBattle();
             } 
         }
         else if (this.playerTrainer.readyPokemon == 0) {
