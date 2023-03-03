@@ -71,7 +71,17 @@
             
             document.getElementById("app").innerHTML = html;
             overworldDialog = ``;
-        };
+            let canvas3 = document.getElementById("overworldScreen");
+            let ctx3 = canvas3.getContext("2d");
+            ctx3.clearRect(0, 0, 1100, 700);
+
+            let landscapeImg = new Image();
+            landscapeImg.onload = function() {
+                ctx3.drawImage(landscapeImg, 0, 0);
+            };
+            let imgNumber = Math.floor(Math.random()*5);
+            landscapeImg.src = `img/landscape/${imgNumber}.png`;
+            };
 
         async function viewBattle() {
             if (battleIsUnderway) {
