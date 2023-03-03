@@ -53,11 +53,12 @@
             let html = `
                 <h1>Ut på eventyr...</h1>
                 <canvas id="overworldScreen" height="700px" width="1100px"></canvas>`;
-            if (!overworldDialog) { //TODO <button onclick="swapPokemon()">Bytt plass på pokemon</button> må ha navigasjonsmeny. Kan sikkert yoinkes fra swapPokemonInBattle
+            if (!overworldDialog) { 
                 overworldDialog = `
                 <div id="neutralMessage">
                     <button onclick="runTrainerBattleInstancing()">Gå i kamp</button>
-                    <button onclick="generateWildPokemon()">Gå i gresset</button>
+                    <button onclick="generateWildPokemon()">Gå i gresset</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    <button onclick="swapPokemonOutside()">Bytt plass på pokemon</button>
                     <p>Money: <b>${player.money}</b></p>
                 </div>
                 `;

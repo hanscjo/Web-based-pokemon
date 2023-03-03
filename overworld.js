@@ -62,3 +62,57 @@ function generateWildPokemon() {
     wildHandler = new npcTrainer('wildHandler', wildPokemon, null, null, null, null, null, 0, '', '', ''); //Dette er bare for å få battle-funksjonene til å fungere bra
     wildBattle1 = new wildBattle(player, wildHandler);
 }
+
+async function swapPokemonOutside() {
+        let totalPokemon = player.trainerPokemon.length;
+        let pressedBackspace = false;
+        let pokemon1 = '';
+        let pokemon2 = '';
+        navY = 0;
+        
+        while (pressedBackspace == false) {
+            overworldDialog = `<table style="width:50%; height:98%">
+            <tr>
+                <td id="choice1" rowspan="${totalPokemon}">${player.getLeadPokemon().getNickname()}</td>
+            </tr>
+            `;
+            const choices = ['choice1'];
+            for (i = 1; i < totalPokemon; i++) {
+                let id = Number(i);
+                id++; 
+                overworldDialog += `
+                <tr>
+                    <td id="choice${id}">${player.trainerPokemon[i].getNickname()}</td>
+                </tr>
+                `;
+                choices.push('choice'+id);
+            }
+            overworldDialog += `</table><p>Trykk backspace eller escape for å komme ut av menyen</p>`;
+            showOverworldDialog();
+            setButtonClassesUpDown(choices);
+            if (typeof pokemon1 == 'number') {
+                document.getElementById(`choice` + Number(pokemon1 + 1)).className = 'buttonSelected';
+            }
+            let keypress = await waitingKeypress();
+            if (keypress.keyCode >= 37 && keypress.keyCode <= 40) {
+                navigateUpDown(keypress.keyCode, choices);
+            }
+            else if (keypress.keyCode == 13)  { //Enter
+                if (!(typeof pokemon1 == 'number')) {
+                    pokemon1 = navY;                   
+                }
+                else {
+                    pokemon2 = navY;
+                    player.swapPokemon(Number(pokemon1), Number(pokemon2));
+                    pokemon1 = '';
+                    pokemon2 = '';
+                }
+            }
+            else if (keypress.keyCode == 8 || keypress.keyCode == 27) {//Backspace eller Escape 
+                pressedBackspace = true;
+                navY = 0; //Nullstille knappen
+                overworldDialog = '';
+                view();
+            }
+        }
+}

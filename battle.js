@@ -131,6 +131,7 @@ class Battle {
             await delay(500);
             this.hidePlayerPokemon();
             this.hidePlayerHpBar();
+            this.resetStats(stored);
             await delay(2000);
             this.playerTrainer.battlePokemon[0] = selectedPokemon;
             this.playerTrainer.battlePokemon[index] = stored;
@@ -1258,6 +1259,13 @@ class Battle {
         }
         
         givenPokemon.battleStats[stat] = givenPokemon.stats[stat] * stageFactor;
+    };
+
+    resetStats(givenPokemon) {
+        for (i in givenPokemon.stages) {
+            givenPokemon.stages[i] = 0;
+            this.updateStats(givenPokemon, i);
+        }
     };
 
     async throwBall(pokeballId) { 
